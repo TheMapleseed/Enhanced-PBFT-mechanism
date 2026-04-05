@@ -103,29 +103,29 @@ Be explicit about limits so you do not mistake this for a full blockchain or pro
 ┌─────────────────────────────────────────────────────────────┐
 │  Your application                                           │
 │  - Open network connections                                 │
-│  - Deserialize PbftMessage, send into each replica’s mpsc    │
-│  - Call propose() on the current primary                    │
+│ - Deserialize PbftMessage, send into each replica’s mpsc    │
+│ - Call propose() on the current primary                     │
 └───────────────────────────┬─────────────────────────────────┘
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  ConsensusCore (per replica)                                 │
-│  - run_inbound(rx) on a thread                               │
-│  - optional spawn_liveness_watcher()                         │
-│  - subscribe_commits() for executed payloads                 │
+│  ConsensusCore (per replica)                                │
+│ - run_inbound(rx) on a thread                               │
+│ - optional spawn_liveness_watcher()                         │
+│ - subscribe_commits() for executed payloads                 │
 └───────────────────────────┬─────────────────────────────────┘
                             │
                             ▼
 ┌───────────────────────────┴─────────────────────────────────┐
-│  SecurityManager                                             │
-│  - hash_consensus(view, sequence, payload) → digest        │
+│  SecurityManager                                            │
+│ - hash_consensus(view, sequence, payload) → digest          │
 └───────────────────────────┬─────────────────────────────────┘
                             │
                             ▼
 ┌───────────────────────────┴─────────────────────────────────┐
-│  time_variant_blake3 + blake3_reference                      │
-│  - IV from TeX-aligned formulas                              │
-│  - BLAKE3 reference implementation (no external blake3 crate) │
+│  time_variant_blake3 + blake3_reference                     │
+│ - IV from TeX-aligned formulas                              │
+│ - BLAKE3 reference implementation(no external blake3 crate) │
 └─────────────────────────────────────────────────────────────┘
 ```
 
